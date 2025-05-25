@@ -23,17 +23,17 @@ async def index():
 
 
 @app.get('/api')
-async def get_marks(names: List[str] = Query(None)):
-    if not names:
+async def get_marks(name: List[str] = Query(None)):
+    if not name:
         return {"error": "No names provided"}
     marks = []
-    for name in names:
+    for nam in name:
         mark = next((student["marks"] for student in students_data 
-                     if student["name"].lower() == name.lower()), None)
+                     if student["name"].lower() == nam.lower()), None)
         marks.append(mark)
     
     return {"marks": marks}
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000,reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=8000,reload=True)
